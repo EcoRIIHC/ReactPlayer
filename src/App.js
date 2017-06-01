@@ -12,7 +12,6 @@ class App extends Component {
   }
   // 处理content和footer的切歌事件
   handleCutSong (songObj) {
-    console.log(songObj)
     this.setState({
       currentSong: songObj
     })
@@ -53,7 +52,7 @@ class App extends Component {
     return (
       <div className="app">
         <Header />
-        <Content songsObject={testJson} currentSong={this.state.currentSong}/>
+        <Content songsObject={testJson} currentSong={this.state.currentSong} onCutSong={this.handleCutSong.bind(this)}/>
         <Footer playList={testJson.data} currentSong={this.state.currentSong} onCutSong={this.handleCutSong.bind(this)}/>
       </div>
     );

@@ -4,12 +4,17 @@ class SongItem extends Component {
     static PropTypes = {
         currentSong: PropTypes.object
     }
+
+    handleCutSong () {
+        let currentSong = this.props.song
+        this.props.onCutSong(currentSong)
+    }
     render () {
         return (
             <li className="list-item">
                 <div className="item id">
                     {this.props.song.id}
-                    <div className={"playthis " + (this.props.currentSong.id === this.props.song.id ? 'current' : '')}></div>
+                    <div className={"playthis " + (this.props.currentSong.id === this.props.song.id ? 'current' : '')} onClick={this.handleCutSong.bind(this)}></div>
                 </div>
                 <div className="item title">{this.props.song.title}</div>
                 <div className="item time">{this.props.song.time}</div>

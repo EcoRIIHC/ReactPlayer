@@ -13,6 +13,9 @@ class Content extends Component {
             songsObject: {}
         }
     }
+    handleCutSong (currentSong) {
+        this.props.onCutSong(currentSong)
+    }
     componentWillMount () {
         this.setState(
             {
@@ -36,7 +39,7 @@ class Content extends Component {
                         <div className="singer list-head small-text">歌手</div>
                         <div className="album list-head small-text">专辑</div>
                     </div>
-                    <SongsList songsList={this.state.songsObject.data} currentSong={this.props.currentSong} />
+                    <SongsList songsList={this.state.songsObject.data} currentSong={this.props.currentSong} onCutSong={this.handleCutSong.bind(this)} />
                 </div>
             </main>
         )
