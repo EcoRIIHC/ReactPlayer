@@ -1,0 +1,2 @@
+2017/06/01 19:45:30 [error] 4420#4884: *1 CreateFile() "D:\WorkSpace\nginx-1.13.1/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2017/06/01 20:15:00 [error] 4420#4884: *15 CreateFile() "D:\WorkSpace\nginx-1.13.1/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/songs/test.mp3"

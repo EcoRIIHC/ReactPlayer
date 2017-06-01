@@ -1,0 +1,48 @@
+.main .list-content-wrapper {
+    text-align: left;
+}
+.main .list-content-wrapper .list-item {
+    height: 40px;
+    line-height: 40px;
+    color: #666;
+}
+.main .list-content-wrapper .list-item:nth-child(odd) {
+    background: #f9f9f9;
+}
+.main .list-content-wrapper .list-item .playthis {
+    position: absolute;
+    top: 11px;
+    left: 32px;
+    width: 20px;
+    height: 20px;
+    background: url(../img/table.png);
+    background-position: 2px 268px;
+    cursor: pointer;
+}
+.main .list-content-wrapper .list-item .playthis:hover {
+    background-position: 2px 243px;
+}
+.main .list-content-wrapper .list-item .playthis.current {
+    background-position: -18px 243px;
+}
+.main .list-content-wrapper .item {
+    display: inline-block;
+    padding: 0 15px;
+    font-size: 12px;
+}
+.main .list-content-wrapper .item.id {
+    position: relative;
+    width: 30px;
+}
+.main .list-content-wrapper .item.title {
+    width: 160px;
+}
+.main .list-content-wrapper .item.time {
+    width: 60px;
+}
+.main .list-content-wrapper .item.singer {
+    width: 60px;
+}
+.main .list-content-wrapper .item.album {
+    width: 85px;
+}

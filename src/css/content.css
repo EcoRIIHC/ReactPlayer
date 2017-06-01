@@ -1,0 +1,49 @@
+.main {
+    width: 770px;
+    margin: 0 auto;
+}
+.main .head {
+    height: 40px;
+    line-height: 40px;
+}
+.main .head .head-title {
+    float: left;
+
+}
+.main .head .head-num {
+    float: left;
+    margin-left: 25px;
+}
+.main .head .head-play-num-wrapper {
+    float: right;
+}
+.main .head .head-play-num {
+    color: red;
+}
+.main .list-head-wrapper {
+    height: 40px;
+    line-height: 40px;
+    background: linear-gradient(to bottom, #f9f9f9 0%, #eee 100%);
+    border-bottom: solid 1px #eee;
+    text-align: left;
+}
+.main .list-head-wrapper .list-head {
+    display: inline-block;
+    border-right: solid 1px #eee;
+    padding: 0 15px;
+}
+.main .list-head-wrapper .list-head.id {
+    width: 30px;
+}
+.main .list-head-wrapper .list-head.title {
+    width: 160px;
+}
+.main .list-head-wrapper .list-head.time {
+    width: 60px;
+}
+.main .list-head-wrapper .list-head.singer {
+    width: 60px;
+}
+.main .list-head-wrapper .list-head.album {
+    width: 85px;
+}
