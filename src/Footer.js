@@ -61,12 +61,25 @@ class Footer extends Component {
     }
     // 播放歌曲
     playSong (n) {
+        if (n < 0) {
+            return
+        }
+        if (n > this.state.playList.length - 1) {
+            n = 0
+        }
+        this.state.currentSong = this.state.playList[n]
+        this.state.currentSong.index = n
+        this.props.onCutSong(this.state.currentSong)
+        this.audio.src = this.state.currentSong.url
+        this.audio.play()
+    }
+    // 播放歌曲，供外部调用，不调用父组件cutSong方法传播状态
+    playSongOutside (n) {
         if (n < 0 || n > this.state.playList.length - 1) {
             return
         }
         this.state.currentSong = this.state.playList[n]
         this.state.currentSong.index = n
-        this.props.onCutSong(this.state.currentSong);
         this.audio.src = this.state.currentSong.url
         this.audio.play()
     }

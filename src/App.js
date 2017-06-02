@@ -11,15 +11,19 @@ class App extends Component {
     }
   }
   // 处理content和footer的切歌事件
-  handleCutSong (songObj) {
+  handleCutSong (songObj, origin) {
     this.setState({
       currentSong: songObj
     })
+    // 如果来源为content组件，才调用footer组件的方法，否则不调用
+    if (origin === 'content') {
+      this.refs.player.playSongOutside(songObj.id - 1)
+    }
   }
   render() {
     let testJson = {
         status: 0,
-        count: 15,
+        count: 3,
         playCount: 56899,
         data: [
             {
@@ -53,7 +57,7 @@ class App extends Component {
       <div className="app">
         <Header />
         <Content songsObject={testJson} currentSong={this.state.currentSong} onCutSong={this.handleCutSong.bind(this)}/>
-        <Footer playList={testJson.data} currentSong={this.state.currentSong} onCutSong={this.handleCutSong.bind(this)}/>
+        <Footer playList={testJson.data} ref="player" currentSong={this.state.currentSong} onCutSong={this.handleCutSong.bind(this)}/>
       </div>
     );
   }

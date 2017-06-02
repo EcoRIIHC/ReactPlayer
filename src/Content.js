@@ -14,7 +14,7 @@ class Content extends Component {
         }
     }
     handleCutSong (currentSong) {
-        this.props.onCutSong(currentSong)
+        this.props.onCutSong(currentSong, 'content')
     }
     componentWillMount () {
         this.setState(
