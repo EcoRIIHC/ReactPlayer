@@ -89,6 +89,7 @@
     height: 15px;
     background: #fff;
     border-radius: 50%;
+    cursor: pointer;
 }
 .footer .field.playzone .progress-pointer .red-point {
     position: absolute;

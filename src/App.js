@@ -28,11 +28,11 @@ class App extends Component {
         data: [
             {
                 id: 1,
-                title: '青岛-钢琴版',
+                title: '你的柔情我真的不懂',
                 time: '02:10',
-                singer: '梁静茹',
+                singer: '刘紫玲',
                 album: '热门华语263',
-                url: 'http://localhost/songs/test.mp3'
+                url: 'http://localhost/songs/test5.mp3'
             },
             {
                 id: 2,

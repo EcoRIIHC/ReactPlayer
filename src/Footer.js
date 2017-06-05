@@ -26,6 +26,21 @@ class Footer extends Component {
             },
             progress: 0
         }
+        // 播放器progressbar对象
+        this.player = {
+            // 最左位置x
+            originLeft: 163,
+            // 最右位置x
+            originRight:　901,
+            // 总长度
+            totalLength: 738,
+            // pointer元素
+            pointer: {},
+            // 是否处于拖拽状态
+            isDragging: false,
+            // 保存鼠标拖拽前的位置
+            originX: 0
+        }
     }
     // 格式化时间
     formatTime (seconds) {
@@ -47,7 +62,6 @@ class Footer extends Component {
         if (this.audio.paused) {
             this.audio.play()
         } else {
-
             this.audio.pause()
         }
     }
@@ -83,12 +97,79 @@ class Footer extends Component {
         this.audio.src = this.state.currentSong.url
         this.audio.play()
     }
+    // 鼠标点击跳转至某一时间
+    handlePlayerClick (e) {
+        this.player.originX = e.clientX
+        this.setPointerPos(e.clientX)
+        this.setPlayerTime(e.clientX)
+    }
+    // 拖动鼠标至某一时间
+    handleMousedown (e) {
+        // 鼠标按下时不更新时间
+        this.bindUpdateTime(false)
+        this.player.isDragging = true
+    }
+    // 拖动鼠标至某一时间
+    handleMouseup (e) {
+        this.player.isDragging = false
+        this.setPlayerTime(e.clientX)
+        this.bindUpdateTime(true)
+    }
+    handleMousemove (e) {
+        if (this.player.isDragging) {
+            this.setPointerPos(e.clientX)
+        }
+    }
+    handleMouseLeave (e) {
+        if (this.player.isDragging) {
+            this.setPointerPos(this.player.originX)
+        }
+        this.player.isDragging = false
+        this.bindUpdateTime(true)
+
+    }
+    // 绑定时间更新事件
+    bindUpdateTime (flag) {
+        if (flag) {
+            this.audio.ontimeupdate = () => {
+                this.setState(
+                    {
+                        currentTime: this.formatTime(this.audio.currentTime)
+                    }
+                )
+                // 进度条
+                let percent = this.audio.currentTime / this.audio.duration
+                this.setState({
+                    progress:　percent * 100 < 99 ? percent * 100 : 99
+                })
+            }
+        } else {
+            this.audio.ontimeupdate = null
+        }
+    }
+    // 根据pointer位置设置播放时间
+    setPlayerTime (x) {
+        let targetTime = (x - this.player.originLeft) / this.player.totalLength * this.audio.duration
+        // 设置播放时间
+        this.audio.currentTime = targetTime
+    }
+    // 设置播放器pointer位置
+    setPointerPos (x) {
+        this.player.pointer.style.left = x - this.player.originLeft - 3 + 'px'
+    }
     componentWillMount () {
         this.state.playList = this.props.playList
+        // 绑定键盘事件
+        document.body.addEventListener('keyup', (e) => {
+            if (e.keyCode === 32) {
+                this.handlePlay()
+            }
+        })
     }
     componentDidMount () {
         this.audio = document.querySelector('audio')
         this.playBtn = document.querySelector('#play-btn')
+        this.player.pointer = document.querySelector('#pointer')
 
         // 播放第一首歌曲
         this.playSong(0)
@@ -110,18 +191,8 @@ class Footer extends Component {
             })
         }
         // 时间更新
-        this.audio.ontimeupdate = () => {
-            this.setState(
-                {
-                    currentTime: this.formatTime(this.audio.currentTime)
-                }
-            )
-            // 进度条
-            let percent = this.audio.currentTime / this.audio.duration
-            this.setState({
-                progress:　percent * 100 < 99 ? percent * 100 : 99
-            })
-        }
+        this.bindUpdateTime(true)
+
         // 播放完成
         this.audio.onended = () => {
             this.setState({
@@ -131,6 +202,7 @@ class Footer extends Component {
         }
         this.audio.onprogress = () => {
         }
+
     }
     render () {
         return (
@@ -143,12 +215,19 @@ class Footer extends Component {
                             <span id="play-btn" className={"play btn " + (this.state.paused ? '' : 'pause')} onClick={this.handlePlay.bind(this)}></span>
                             <span className="next-play btn" onClick={this.handleNext.bind(this)}></span>
                         </div>
-                        <div className="playzone field">
+                        <div className="playzone field"
+                            onMouseUp={this.handleMouseup.bind(this)}
+                            onMouseMove={this.handleMousemove.bind(this)}
+                            onMouseLeave={this.handleMouseLeave.bind(this)}>
                             <div className="lyric"></div>
                             <div className="progress-wrapper">
-                                <div className="progressbar">
-                                    <span className="progress-pointer" style={{left: this.state.progress + '%'}}>
-                                        <i className="red-point"></i>
+                                <div className="progressbar" draggable="false"
+                                    onClick={this.handlePlayerClick.bind(this)}
+                                    onKeyUp={this.handleKeyup}>
+                                    <span id="pointer" draggable="false" className="progress-pointer" style={{left: this.state.progress + '%'}}
+                                    onMouseDown={this.handleMousedown.bind(this)}
+                                    >
+                                        <i draggable="false" className="red-point"></i>
                                     </span>
                                 </div>
                             </div>
