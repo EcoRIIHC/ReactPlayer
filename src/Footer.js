@@ -149,13 +149,13 @@ class Footer extends Component {
     }
     // 根据pointer位置设置播放时间
     setPlayerTime (x) {
-        let targetTime = (x - this.player.originLeft) / this.player.totalLength * this.audio.duration
+        let targetTime = (x - this.player.originLeft - 27) / this.player.totalLength * this.audio.duration
         // 设置播放时间
         this.audio.currentTime = targetTime
     }
     // 设置播放器pointer位置
     setPointerPos (x) {
-        this.player.pointer.style.left = x - this.player.originLeft - 3 + 'px'
+        this.player.pointer.style.left = x - this.player.originLeft - 27 + 'px'
     }
     componentWillMount () {
         this.state.playList = this.props.playList
