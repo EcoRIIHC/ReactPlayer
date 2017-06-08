@@ -30,9 +30,9 @@ class Footer extends Component {
         // 播放器progressbar对象
         this.player = {
             // 最左位置x
-            originLeft: 163,
+            originLeft: 555,
             // 最右位置x
-            originRight:　901,
+            originRight: 1292,
             // 总长度
             totalLength: 738,
             // pointer元素
@@ -150,13 +150,13 @@ class Footer extends Component {
     }
     // 根据pointer位置设置播放时间
     setPlayerTime (x) {
-        let targetTime = (x - this.player.originLeft - 27) / this.player.totalLength * this.audio.duration
+        let targetTime = (x - this.player.originLeft - 5) / this.player.totalLength * this.audio.duration
         // 设置播放时间
         this.audio.currentTime = targetTime
     }
     // 设置播放器pointer位置
     setPointerPos (x) {
-        this.player.pointer.style.left = x - this.player.originLeft - 27 + 'px'
+        this.player.pointer.style.left = x - this.player.originLeft - 5 + 'px'
     }
     componentWillMount () {
         this.state.playList = this.props.playList
