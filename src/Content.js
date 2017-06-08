@@ -16,20 +16,13 @@ class Content extends Component {
     handleCutSong (currentSong) {
         this.props.onCutSong(currentSong, 'content')
     }
-    componentWillMount () {
-        this.setState(
-            {
-                songsObject: this.props.songsObject
-            }
-        )
-    }
     render () {
         return (
             <main className="main">
                 <div className="head">
                     <span className="head-title">歌曲列表</span>
-                    <span className="head-num small-text">{this.state.songsObject.count}首歌</span>
-                    <span className="head-play-num-wrapper small-text">播放：<span className="head-play-num small-text">{this.state.songsObject.playCount}</span>次</span>
+                    <span className="head-num small-text">{this.props.songsObject.count}首歌</span>
+                    <span className="head-play-num-wrapper small-text">播放：<span className="head-play-num small-text">{this.props.songsObject.playCount}</span>次</span>
                 </div>
                 <div className="content">
                     <div className="list-head-wrapper">
@@ -39,7 +32,7 @@ class Content extends Component {
                         <div className="singer list-head small-text">歌手</div>
                         <div className="album list-head small-text">专辑</div>
                     </div>
-                    <SongsList songsList={this.state.songsObject.data} currentSong={this.props.currentSong} onCutSong={this.handleCutSong.bind(this)} />
+                    <SongsList songsList={this.props.songsObject.data} currentSong={this.props.currentSong} onCutSong={this.handleCutSong.bind(this)} />
                 </div>
             </main>
         )

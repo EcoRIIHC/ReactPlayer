@@ -8,7 +8,8 @@ class Footer extends Component {
         onCutSong: PropTypes.func
     }
     static defaultProps = {
-        playList: []
+        playList: [],
+        currentSong: {}
     }
     constructor () {
         super()
